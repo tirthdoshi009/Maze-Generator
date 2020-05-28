@@ -1,9 +1,10 @@
 var cols, rows;
-var w = 40;
+var w = 5;
 var grid = [];
 
 var current ;
 
+var stack = [];
 
 function setup(){
     createCanvas(400,400);
@@ -40,10 +41,17 @@ function draw(){
         //STEP 1 : Mark the next node as visited
         next.visited = true;
 
+        //STEP 2: 
+        stack.push(current);
+
         //STEP 3 : Remove walls between the current and next
         removeWalls(current,next);
         //STEP 4: Make the next node as the current node, note that the draw function keeps running continously
         current = next;
+    }
+    else if(stack.length > 0){
+        var cell = stack.pop();
+        current = cell;
     }
 }
 
